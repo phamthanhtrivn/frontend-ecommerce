@@ -31,7 +31,7 @@ export const routes = [
         element: <Contact />,
       },
       {
-        path: "/product/:id",
+        path: "/product/:productId",
         element: <Product />,
       },
       {
