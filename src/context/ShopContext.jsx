@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
-import { createContext, useEffect, useState } from "react"
+import { createContext, useState } from "react"
 import { products } from "../assets/frontend_assets/assets";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom"
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const ShopContext = createContext();
@@ -13,6 +14,7 @@ const ShopContextProvider = (props) => {
   const [search, setSearch] = useState('');
   const [showSearch, setShowSearch] = useState(false)
   const [cartItems, setCartItems] = useState({})
+  const navigate = useNavigate()
 
   const addToCart = async (itemId, size) => {
     if (!size) {
@@ -34,7 +36,9 @@ const ShopContextProvider = (props) => {
       cartData[itemId][size] = 1
     }
     setCartItems(cartData)
-    toast.success('Thêm sản phẩm vào giỏ hàng thành công!')
+    toast.success('Thêm sản phẩm vào giỏ hàng thành công!', {
+      position: 'top-center'
+    })
   }
 
   const getCartCount = () => {
@@ -49,6 +53,25 @@ const ShopContextProvider = (props) => {
     return totalCount
   }
 
+  const updateQuantity = (itemId, size, quantity) => {
+    let cartData = structuredClone(cartItems)
+    cartData[itemId][size] = quantity;
+    setCartItems(cartData)
+  }
+
+  const getCartAmount = () => {
+    let totalAmout = 0;
+    for (const items in cartItems) {
+      let itemInfo = products.find((product) => product._id === items)
+      for (const item in cartItems[items]) {
+        if (cartItems[items][item] > 0) {
+          totalAmout += itemInfo.price * cartItems[items][item]
+        }
+      }
+    }
+    return totalAmout
+  }
+
   const value = {
     products,
     currency,
@@ -59,13 +82,11 @@ const ShopContextProvider = (props) => {
     setShowSearch,
     cartItems, 
     addToCart,
-    getCartCount
+    getCartCount,
+    updateQuantity,
+    getCartAmount,
+    navigate
   }
-
-  useEffect(() => {
-    console.log(cartItems);
-    
-  }, [cartItems])
 
   return (
     <ShopContext.Provider value={value}>
