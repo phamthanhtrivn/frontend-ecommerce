@@ -6,7 +6,7 @@ import CartTotal from "../../components/CartTotal";
 import { toast } from "react-toastify";
 
 function Cart() {
-  const { products, currency, cartItems, updateQuantity, navigate } =
+  const { products, currency, cartItems, updateQuantity, navigate, formatMoney } =
     useContext(ShopContext);
 
   const [cartData, setCartData] = useState([]);
@@ -56,7 +56,7 @@ function Cart() {
                     </p>
                     <div className="flex items-center gap-5 mt-2">
                       <p>
-                        {productData.price} {currency}{" "}
+                        {formatMoney(productData.price)} {currency}{" "}
                       </p>
                       <p>&bull;</p>
                       <p className="px-2 sm:px-3 sm:py-1 border border-gray-300 bg-slate-50">

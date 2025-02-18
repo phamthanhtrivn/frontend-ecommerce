@@ -16,6 +16,10 @@ const ShopContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({})
   const navigate = useNavigate()
 
+  const formatMoney = (number) => {
+    return number.toLocaleString('vi-VN')
+  }
+
   const addToCart = async (itemId, size) => {
     if (!size) {
       toast.error('Vui lòng chọn size trước khi thêm vào giỏ hàng')
@@ -85,7 +89,8 @@ const ShopContextProvider = (props) => {
     getCartCount,
     updateQuantity,
     getCartAmount,
-    navigate
+    navigate,
+    formatMoney
   }
 
   return (
