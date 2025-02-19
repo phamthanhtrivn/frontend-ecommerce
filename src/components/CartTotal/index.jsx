@@ -7,7 +7,7 @@ function CartTotal() {
   return (
     <div className="w-full">
       <div className="text-2xl">
-        <Title text1={'CART'} text2={'TOTALS'} />
+        <Title text1={'TỔNG'} text2={'TIỀN'} />
       </div>
 
       <div className="flex flex-col gap-2 mt-2 text-sm">
@@ -15,13 +15,13 @@ function CartTotal() {
           <p>Subtotal</p>
           <p>{formatMoney(getCartAmount())} {currency}</p>
         </div>
-        <hr />
+        <hr className="text-gray-300" />
         <div className="flex justify-between">
           <p>Shipping Fee</p>
           <p>{formatMoney(delivery_fee)} {currency}</p>
         </div>
-        <hr />
-        <div className="flex justify-between">
+        <hr className="text-gray-300" />
+        <div className="flex justify-between text-xl sm:text-2xl">
           <b>Total</b>
           <b>{getCartAmount() === 0 ? 0 : formatMoney(getCartAmount() + delivery_fee)} {currency}</b>
         </div>

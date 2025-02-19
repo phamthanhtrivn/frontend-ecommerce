@@ -10,7 +10,7 @@ export const ShopContext = createContext();
 const ShopContextProvider = (props) => {
 
   const currency = "VNĐ";
-  const delivery_fee = 10000;
+  const delivery_fee = 50000;
   const [search, setSearch] = useState('');
   const [showSearch, setShowSearch] = useState(false)
   const [cartItems, setCartItems] = useState({})
