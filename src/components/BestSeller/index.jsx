@@ -11,7 +11,7 @@ function BestSeller() {
     const bestProducts = products.filter((product) => product.bestseller);
     setBestSeller(bestProducts.slice(0, 5));
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [products]);
   
   return (
     <div className="my-10">
