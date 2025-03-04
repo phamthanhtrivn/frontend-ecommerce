@@ -6,26 +6,34 @@ import CartTotal from "../../components/CartTotal";
 import { toast } from "react-toastify";
 
 function Cart() {
-  const { products, currency, cartItems, updateQuantity, navigate, formatMoney } =
-    useContext(ShopContext);
+  const {
+    products,
+    currency,
+    cartItems,
+    updateQuantity,
+    navigate,
+    formatMoney,
+  } = useContext(ShopContext);
 
   const [cartData, setCartData] = useState([]);
 
   useEffect(() => {
-    const tempData = [];
-    for (const items in cartItems) {
-      for (const item in cartItems[items]) {
-        if (cartItems[items][item] > 0) {
-          tempData.push({
-            _id: items,
-            size: item,
-            quantity: cartItems[items][item],
-          });
+    if (products.length > 0) {
+      const tempData = [];
+      for (const items in cartItems) {
+        for (const item in cartItems[items]) {
+          if (cartItems[items][item] > 0) {
+            tempData.push({
+              _id: items,
+              size: item,
+              quantity: cartItems[items][item],
+            });
+          }
         }
       }
+      setCartData(tempData);
     }
-    setCartData(tempData);
-  }, [cartItems]);
+  }, [cartItems, products]);
 
   return (
     <div className="border-t pt-14">
@@ -93,7 +101,10 @@ function Cart() {
           <div className="flex flex-col items-center text-2xl font-medium my-20 text-center">
             <img className="w-10" src={assets.cart_icon} alt="cart_icon" />
             <p className="mt-5">GIỎ HÀNG CỦA BẠN CÒN TRỐNG</p>
-            <button onClick={() => navigate('/collection')} className="bg-black text-white text-sm px-8 py-3 mt-5 cursor-pointer">
+            <button
+              onClick={() => navigate("/collection")}
+              className="bg-black text-white text-sm px-8 py-3 mt-5 cursor-pointer"
+            >
               MUA NGAY
             </button>
           </div>
