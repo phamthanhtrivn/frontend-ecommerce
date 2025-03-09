@@ -13,6 +13,7 @@ function Cart() {
     updateQuantity,
     navigate,
     formatMoney,
+    token
   } = useContext(ShopContext);
 
   const [cartData, setCartData] = useState([]);
@@ -121,7 +122,7 @@ function Cart() {
                   ? toast.error("Giỏ hàng không có sản phẩm để thanh toán", {
                       position: "top-center",
                     })
-                  : navigate("/place-order")
+                  : (token ? navigate("/place-order") : toast.error("Vui lòng đăng nhập để thanh toán đơn hàng!"))
               }
               className="font-medium bg-black text-white text-sm my-8 px-8 py-3 cursor-pointer"
             >

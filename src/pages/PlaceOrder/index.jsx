@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import Title from "../../components/Title";
 import CartTotal from "../../components/CartTotal";
 import { assets } from "../../assets/frontend_assets/assets";
@@ -33,7 +34,7 @@ function PlaceOrder() {
     const name = e.target.name;
     const value = e.target.value;
 
-    setFormData((data) => ({ ...data, [name]: value.trim() }));
+    setFormData((data) => ({ ...data, [name]: value }));
   };
 
   const onSubmitHandle = async (e) => {
@@ -64,15 +65,21 @@ function PlaceOrder() {
       switch (method) {
         // API call for COD
         case "cod":
-          // eslint-disable-next-line no-case-declarations
-          const response = await axios.post(backendUrl + '/api/order/place', orderData, {headers: {token}})
+          const response = await axios.post(
+            backendUrl + "/api/order/place",
+            orderData,
+            { headers: { token } }
+          );
           if (response.data.success) {
-            setCartItems({})
-            navigate('/orders')
+            setCartItems({});
+            navigate("/orders");
+          } else {
+            toast.error(response.data.message);
           }
-          else {
-            toast.error(response.data.message)
-          }
+          break;
+        case "stripe":
+          break;
+        case "momo":
           break;
 
         default:
@@ -80,7 +87,7 @@ function PlaceOrder() {
       }
     } catch (error) {
       console.log(error);
-      toast.error(error.message)
+      toast.error(error.message);
     }
   };
 
