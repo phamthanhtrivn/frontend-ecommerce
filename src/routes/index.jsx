@@ -8,7 +8,6 @@ import Login from "../pages/Login";
 import PlaceOrder from "../pages/PlaceOrder";
 import Orders from "../pages/Orders";
 import LayoutDefault from "../layout/LayoutDefault";
-import MyProfile from "../pages/MyProfile";
 
 export const routes = [
   {
@@ -50,11 +49,7 @@ export const routes = [
       {
         path: "/orders",
         element: <Orders />,
-      },
-      {
-        path: "/my-profile",
-        element: <MyProfile />,
-      },
+      }
     ],
   },
 ];
