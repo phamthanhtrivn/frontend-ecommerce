@@ -1,7 +1,7 @@
 /* eslint-disable no-case-declarations */
 import Title from "../../components/Title";
 import CartTotal from "../../components/CartTotal";
-import { assets } from "../../assets/frontend_assets/assets";
+// import { assets } from "../../assets/frontend_assets/assets";
 import { useContext, useState } from "react";
 import { ShopContext } from "../../context/ShopContext";
 import axios from "axios";
@@ -190,7 +190,7 @@ function PlaceOrder() {
           <Title text1={"THANH"} text2={"TOÁN"} />
           {/* Payment method selection */}
           <div className="flex gap-3 flex-col lg:flex-row">
-            <div
+            {/* <div
               onClick={() => {
                 setMethod("stripe");
               }}
@@ -223,7 +223,7 @@ function PlaceOrder() {
                 src={assets.momo_icon}
                 alt="momo_icon"
               />
-            </div>
+            </div> */}
             <div
               onClick={() => {
                 setMethod("cod");
